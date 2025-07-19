@@ -137,14 +137,14 @@ void multiplication(){
         printf("= %d",InputA * InputB);
         printf("\n\n");
         printf("Would you like to do another calculation?\n(Answer 1 for yes, and 0 for no):");
-        scanf("%d",&i);
+        scanf("%d",&userAnswer);
         Answer = (userAnswer != 0);
          
     }while(Answer);
 }
 
 void division() {
-    float InputA, InputB; // Usar float para divisão permite resultados com casas decimais
+    float InputA, InputB; // using float to allow float results
     bool keepGoing = true;
     int userAnswer;
 
