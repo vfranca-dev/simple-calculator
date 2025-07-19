@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define MAX_NUMBERS 100
 
@@ -9,12 +10,10 @@ int menu();                 //using functions to keep my code cleaner
 void addition();            //and simpler to read
 void subtraction();
 void multiplication();
-void multiplication();
 void division();
 
 
 int main(){
-    int R;
     int option = -1;
 
     printf("\n\nHow can I help you today?\n");
@@ -36,6 +35,7 @@ int main(){
                 break;
             case 4:
                 printf("SELECTED OPTION: Division.\n");
+                division();
                 break;
             case 0:
                 printf("ByeBye!\n");
@@ -105,29 +105,30 @@ void addition() {
     printf(" = %d\n", sum);
     printf("\n\n\n");
 }
+void subtraction() {
+    int total, numberToSubtract;
+    
+    printf("\nPlease enter the starting number: ");
+    scanf("%d", &total);
 
-void subtraction(){
-    int Input, InputB;
-    printf("Please enter an integer number: ");
-    scanf("%d",&Input);
-    for(int i=1;i>0;i++){
-        printf("\nsubtract a number or type 0 to finish:"); //could also be used to sum if user uses "-" 
-        printf("\n%d -",Input);                             //this would be e.g.: 2 - (-2), which is 4
-        scanf("%d",&InputB);
-        printf("= %d",(Input-InputB));
-        if(Input ==0){
-            i = Input;
+    while (true) {
+        printf("\nCurrent total: %d. Enter number to subtract (or 0 to finish): ", total);
+        scanf("%d", &numberToSubtract);
+
+        if (numberToSubtract == 0) {
+            break; // exits if user typed 0
         }
-        Input = Input-InputB;
+
+        total -= numberToSubtract; 
+        printf("New total is: %d\n", total);
     }
-
-
-
+    printf("\nFinal result: %d\n", total);
 }
 
 void multiplication(){
     int InputA, InputB;
-    bool Answer = 1;
+    bool Answer = true; //not needed at all, but using
+    int userAnswer=1;
     do{
         printf("\nPlease enter two integer numbers to multiply A * B:\n"); //keeping it minimal
         scanf("%d",&InputA);
@@ -136,10 +137,33 @@ void multiplication(){
         printf("= %d",InputA * InputB);
         printf("\n\n");
         printf("Would you like to do another calculation?\n(Answer 1 for yes, and 0 for no):");
-        scanf("%d",&Answer);
-    }while(Answer != 0);
+        scanf("%d",&i);
+        Answer = (userAnswer != 0);
+         
+    }while(Answer);
 }
 
-void division(){
+void division() {
+    float InputA, InputB; // Usar float para divisão permite resultados com casas decimais
+    bool keepGoing = true;
+    int userAnswer;
 
+    do {
+        printf("\nPlease enter two numbers to divide A / B:\n");
+        printf("Enter A: ");
+        scanf("%f", &InputA);
+        printf("Enter B: ");
+        scanf("%f", &InputB);
+
+        if (InputB == 0) {
+            printf("\nError: Division by zero is not allowed!\n");
+        } else {
+            printf("%.2f / %.2f = %.2f\n", InputA, InputB, InputA / InputB);
+        }
+        
+        printf("\nWould you like to do another calculation? (1 for yes, 0 for no): ");
+        scanf("%d", &userAnswer);
+        keepGoing = (userAnswer != 0);
+
+    } while (keepGoing);
 }
